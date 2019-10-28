@@ -8,7 +8,7 @@ class PiezaTresRaya(PiezaAbstracta):
             Parametros:
                 - tipo: String del tipo de pieza.
         """
-        self.tipo = tipo
+        self.__tipo = tipo
 
     def obtener_tipo(self):
         """ Metodo para obtener al tipo de pieza.
@@ -16,10 +16,10 @@ class PiezaTresRaya(PiezaAbstracta):
             Return:
                 Un String del tipo de pieza.
         """
-        return self.tipo
+        return self.__tipo
     
     def __eq__(self, other):
         return isinstance(other, PiezaTresRaya) and self.tipo == other.tipo
 
     def __str__(self):
-        return self.tipo
+        return self.__tipo
