@@ -6,18 +6,10 @@ class ArbitroAbstracto(ABC):
     La clase proporciona la estructura de las reglas del juego.
     """
 
-    @abstractmethod
-    def jugar(self, x, y):
-        """Método que realiza un movimiento.
-        ---
-            Parámetros:
-                - x: Fila del tablero.
-                - y: Columna del tablero.
-        """
-        pass
+
 
     @abstractmethod
-    def es_valido(self, x, y):
+    def es_valido(self, tablero, x, y):
         """Método que comprueba la jugada.
         ---
             Parámetros:
@@ -25,23 +17,5 @@ class ArbitroAbstracto(ABC):
                 - y: Columna del tablero.
             Returns:
                 True si el movimiento es válido, sino False.
-        """
-        pass
-
-    @abstractmethod
-    def obtener_ganador(self):
-        """Método que decide si la partida ha terminado.
-        ---
-            Returs:
-                Un Jugador con el ganador.
-        """
-        pass
-
-    @abstractmethod
-    def obtener_turno(self):
-        """Método que obtiene el jugador con el turno.
-        ---
-            Returns:
-                Jugador con el turno.
         """
         pass
