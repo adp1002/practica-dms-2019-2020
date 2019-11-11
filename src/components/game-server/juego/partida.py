@@ -3,7 +3,7 @@ from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
 class Partida():
 	"""docstring for ."""
 
-	def __init__(self, fabrica_juego, jugador1, jugador2):
+	def __init__(self, fabrica_juego, jugador1, jugador2, fabrica_arbitro):
 		""" Constructor.
 		---
 			Parámetros:
@@ -18,6 +18,7 @@ class Partida():
 		self.__piezas = fabrica_juego.crear_pieza()
 		self.__turno = 0
 		self.__ganador = None
+		self.__arbitro = fabrica_arbitro.crear_arbitro(self.__tablero)
 
 	def jugar(self, x, y):
 		""" Método que realiza un movimiento.
@@ -26,7 +27,10 @@ class Partida():
 				- x: Fila del tablero.
 				- y: Columna del tablero.
 		"""
-		pass
+		if self.__arbitro.es_valido(x,y):
+			self.__tablero.colocar(x,y)
+			self.obtener_ganador()
+			self.__turno += 1
 
 	def obtener_ganador(self):
 		""" Método que devuelve el ganador de la partida.
@@ -34,7 +38,7 @@ class Partida():
 			Returs:
 				El Jugador con el ganador, si no hay ganador None
 		"""
-		return self.__ganador
+		return self.obtener_turno if self.esta_acabado() else None
 
 	def esta_acabado(self):
 		""" Método que decide si la partida ha terminado.
@@ -42,7 +46,7 @@ class Partida():
 			Returs:
 				True si la partida esta terminada, sino False
 		"""
-		return self.__ganador != None
+		return self.__arbitro.esta_acabado()
 
 	def obtener_turno(self):
 		""" Método que obtiene el jugador con el turno.
