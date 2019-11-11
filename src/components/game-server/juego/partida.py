@@ -28,7 +28,8 @@ class Partida():
 				- y: Columna del tablero.
 		"""
 		if self.__arbitro.es_valido(x,y):
-			self.__tablero.colocar(x,y)
+			self.__tablero.colocar(x, y,
+				self.__fabrica.crear_pieza(self.obtener_turno().obtener_tipo()))
 			self.obtener_ganador()
 			self.__turno += 1
 
