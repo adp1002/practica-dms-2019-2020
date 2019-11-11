@@ -30,7 +30,6 @@ class Partida():
 		if self.__arbitro.es_valido(x,y):
 			self.__tablero.colocar(x, y,
 				self.__fabrica.crear_pieza(self.obtener_turno().obtener_tipo()))
-			self.obtener_ganador()
 			self.__turno += 1
 
 	def obtener_ganador(self):
