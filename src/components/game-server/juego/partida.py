@@ -4,7 +4,7 @@ from juego.jugador_empate import JugadorEmpate
 class Partida():
 	"""docstring for ."""
 
-	def __init__(self, fabrica_juego, jugador1, jugador2, fabrica_arbitro):
+	def __init__(self, fabrica_juego, fabrica_arbitro):
 		""" Constructor.
 		---
 			Parámetros:
@@ -12,14 +12,24 @@ class Partida():
 				- jugador1: Jugador 1.
 				- jugador2: Jugador 2.
 		"""
-		self.__jugador1 = jugador1
-		self.__jugador2 = jugador2
+		self.__jugador1 = None
+		self.__jugador2 = None
 		self.__fabrica = fabrica_juego
 		self.__tablero = fabrica_juego.crear_tablero()
 		self.__piezas = fabrica_juego.crear_pieza()
 		self.__turno = 0
 		self.__ganador = None
 		self.__arbitro = fabrica_arbitro.crear_arbitro(self.__tablero)
+
+	def registrar_jugador(self, jugador):
+		if self.__jugador1 is None:
+			self.__jugador1 = jugador
+		elif self.__jugador2 is None:
+			self.__jugador2 = jugador
+		else:
+			return False
+		return True
+		
 
 	def jugar(self, x, y):
 		""" Método que realiza un movimiento.
