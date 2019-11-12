@@ -1,7 +1,7 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
 from tres_raya.modelo.pieza_tres_raya import PiezaTresRaya
 from tres_raya.modelo.tablero_tres_raya import TableroTresRaya
-from tres_raya.modelo.arbitro_tres_raya import ArbitroTresRaya
+from tres_raya.control.arbitro_tres_raya import ArbitroTresRaya
 
 class FabricaTresRaya(FabricaJuegoMesa):
 

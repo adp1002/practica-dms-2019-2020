@@ -1,7 +1,7 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
 from juego.jugador_empate import JugadorEmpate
 
-class Partida():
+class Partida:
 	"""docstring for ."""
 
 	def __init__(self, fabrica_juego, fabrica_arbitro):
@@ -16,7 +16,6 @@ class Partida():
 		self.__jugador2 = None
 		self.__fabrica = fabrica_juego
 		self.__tablero = fabrica_juego.crear_tablero()
-		self.__piezas = fabrica_juego.crear_pieza()
 		self.__turno = 0
 		self.__ganador = None
 		self.__arbitro = fabrica_arbitro.crear_arbitro(self.__tablero)
@@ -24,8 +23,10 @@ class Partida():
 	def registrar_jugador(self, jugador):
 		if self.__jugador1 is None:
 			self.__jugador1 = jugador
+			self.__jugador1.establecer_tipo('X')
 		elif self.__jugador2 is None:
 			self.__jugador2 = jugador
+			self.__jugador2.establecer_tipo('O')
 		else:
 			return False
 		return True
@@ -70,3 +71,6 @@ class Partida():
 				Jugador con el turno.
 		"""
 		return self.__jugador1 if self.__turno % 2 == 0 else self.__jugador2
+
+	def obtener_tablero(self):
+		return self.__tablero
