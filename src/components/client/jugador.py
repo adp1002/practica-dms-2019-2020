@@ -1,11 +1,12 @@
+import os
 import requests
 
 class Jugador:
 
-    def __init__(self,username,password,auth_server):
-        self.username = username
-        self.password = password
-        self.auth_server = auth_server
+    def __init__():
+        self.username = input('Introduce el nombre del usuario')
+        self.password = input('Introduce la contraseña del usuario')
+        self.auth_server = os.getenv('AUTH_SERVER_PORT', 1234)
 
         '''Creamos el usuario con el APIREST'''
         data = {'username':username,
@@ -14,10 +15,16 @@ class Jugador:
 
         if response.status_code == 500:
             '''500: El usuario no pudo ser creado (probablemente por exister uno con el mismo nombre)'''
-            print('El usuario no pudo ser creado, probando login')
+            print('Probando login...')
 
         '''Probamos a logear al usuario'''
         self.login()
+
+    '''
+    def conexion_servidor():
+        while (true):
+            input('Presiona una tecla para refresacar.')
+    '''
 
 
     def login():
