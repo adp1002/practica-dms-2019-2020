@@ -1,5 +1,4 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
-from juego.jugador_empate import JugadorEmpate
 
 class Partida:
 	"""docstring for ."""
@@ -31,7 +30,6 @@ class Partida:
 			return False
 		return True
 		
-
 	def jugar(self, x, y):
 		""" Método que realiza un movimiento.
 		---
@@ -50,11 +48,8 @@ class Partida:
 			Returs:
 				El Jugador con el ganador, si no hay ganador None
 		"""
-		if self.__arbitro.hay_ganador():
-			return self.obtener_turno()
-		if self.esta_acabado():
-			return JugadorEmpate.instance()
-		return None
+		return self.obtener_turno() if self.__arbitro.hay_ganador() else None
+
 
 	def esta_acabado(self):
 		""" Método que decide si la partida ha terminado.

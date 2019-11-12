@@ -10,7 +10,7 @@ class ArbitroTresRaya(ArbitroAbstracto):
         Parametros:
             - tablero: tablero de la partida.
         """
-        super(ArbitroTresRaya, self).__init__(tablero)
+        super().__init__(tablero)
 
     def hay_ganador(self):
         """
