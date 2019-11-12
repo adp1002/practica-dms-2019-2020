@@ -8,5 +8,6 @@ class ArbitroAbstracto(ABC):
     def es_valido(self, x, y):
         return self._tablero.obtener_pieza(x, y) != None
 
-    def esta_acabado(self):
-        return self._tablero.esta_lleno()
+    @abstractmethod
+    def hay_ganador(self):
+        pass
