@@ -29,3 +29,27 @@ def registrar_jugador():
         return message
     else:
         abort(code)
+
+@app.route('/juego/turno', methods = ['GET'])
+def comprobar_turno():
+    (code, message) = rest_api.comprobar_turno(request)
+    if (code == 200):
+        return message
+    else:
+        abort(code)
+
+@app.route('/juego/jugada', methods = ['POST'])
+def realizar_jugada():
+    (code, message) = rest_api.realizar_jugada(request)
+    if (code == 200):
+        return message
+    else:
+        abort(code)
+
+@app.route('/juego/tablero', methods = ['GET'])
+def obtener_tablero():
+    (code, message) = rest_api.obtener_tablero(request)
+    if (code == 200):
+        return message
+    else:
+        abort(code)

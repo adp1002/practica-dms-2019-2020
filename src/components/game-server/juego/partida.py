@@ -41,6 +41,8 @@ class Partida:
 			self.__tablero.colocar(x, y,
 				self.__fabrica.crear_pieza(self.obtener_turno().obtener_tipo()))
 			self.__turno += 1
+		else:
+			raise
 
 	def obtener_ganador(self):
 		""" Método que devuelve el ganador de la partida.
