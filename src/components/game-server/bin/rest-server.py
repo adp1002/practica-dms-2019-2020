@@ -1,7 +1,11 @@
 from flask import Flask, escape, request, abort
 from presentacion.restapi import RestApi
 
-rest_api = RestApi('TresRaya')
+import os
+
+juego = os.getenv('GAME', 'TresRaya')
+
+rest_api = RestApi(juego)
 
 app = Flask(__name__)
 
@@ -49,6 +53,22 @@ def realizar_jugada():
 @app.route('/juego/tablero', methods = ['GET'])
 def obtener_tablero():
     (code, message) = rest_api.obtener_tablero(request)
+    if (code == 200):
+        return message
+    else:
+        abort(code)
+
+@app.route('/juego/acabado', methods = ['GET'])
+def esta_acabado():
+    (code, message) = rest_api.esta_acabado(request)
+    if (code == 200):
+        return message
+    else:
+        abort(code)
+
+@app.route('/juego/resultado', methods = ['GET'])
+def obtener_resultado():
+    (code, message) = rest_api.obtener_resultado(request)
     if (code == 200):
         return message
     else:

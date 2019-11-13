@@ -2,6 +2,8 @@
 
 SCRIPT_PATH=$(dirname $0)
 
+export GAME='TresRaya'
+
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 export FLASK_APP=${SCRIPT_PATH}/rest-server.py
