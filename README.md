@@ -134,3 +134,66 @@ El servidor usa las siguientes variables de entorno para su configuración:
 - `HUB_SERVER_PORT`: El puerto en el que publicará su API REST.
 - `AUTH_SERVER_HOST`: El host en el que se encuentra el servidor de autenticación.
 - `AUTH_SERVER_PORT`: El puerto en el que está publicado el API REST del servidor de autenticación.
+
+### dms1920-game-server
+
+Es el servidor del juego.
+
+#### API REST
+
+La comunicación con el servicio se realiza a través de un API REST:
+
+- `/`: Verificación del estado del servidor. No realiza ninguna operación, pero permite conocer si el servidor está funcionando sin miedo a alterar su estado en modo alguno.
+  - **Método**: `GET`
+  - **Respuesta**:
+    - `200`: El servidor está funcionando correctamente.
+- `/juego/registrar`: Endpoint de registros de jugadores.
+  - **Método**: `POST`
+  - **Parámetros**:
+    - `token`: El token de usuario.
+  - **Respuesta**:
+    - `200`: Se ha registrado correctamente.
+    - `401`: El token dado es incorrecto.
+    - `500`: La partida ya tiene 2 jugadores.
+- `/juego/turno`: Endpoint de comprobacion del turno.
+  - **Método**: `GET`
+  - **Parámetros**:
+    - `token`: El token de usuario.
+  - **Respuesta**:
+    - `200`: Devuelve **true** si el jugador tiene el turno, sino **false**.
+    - `401`: El token dado es incorrecto.
+- `/juego/jugada`: Endpoint de realizacion de jugadas.
+  - **Método**: `POST`
+  - **Parámetros**:
+    - `token`: El token de usuario.
+    - `x`: Coordenada x del tablero.
+    - `y`: Coordenada y del tablero.
+  - **Respuesta**:
+    - `200`: Jugada correcta.
+    - `400`: La jugada no es valida (coordenadas incorrectas o jugador sin turno).
+    - `401`: El token dado es incorrecto.
+- `/juego/tablero`: Endpoint del estado del tablero.
+  - **Método**: `GET`
+  - **Respuesta**:
+    - `200`: El tablero codificado en JSON en el contenido de la respuesta.
+- `/juego/acabado`: Endpoint que comprueba si la partida esta acabada.
+  - **Método**: `GET`
+  - **Respuesta**:
+    - `200`: Devuelve **true** si la partida esta acabada, sino **false**.
+    
+- `/juego/resultado`: Endpoint informa del resultado de la partida.
+  - **Método**: `GET`
+  - **Parámetros**:
+    - `token`: El token de usuario.
+  - **Respuesta**:
+    - `200`: Devuelve el resultado del jugador ('Ganador', 'Perdedor' o 'Empate').
+    - `400`: La partida no esta acabada.
+    - `401`: El token dado es incorrecto.
+
+#### Configuración
+
+El servidor usa las siguientes variables de entorno para su configuración:
+
+- `GAME`: Nombre del juego.
+- `AUTH_SERVER_HOST`: El host en el que se encuentra el servidor de autenticación.
+- `AUTH_SERVER_PORT`: El puerto en el que está publicado el API REST del servidor de autenticación.
