@@ -37,7 +37,7 @@ class Partida:
 				- x: Fila del tablero.
 				- y: Columna del tablero.
 		"""
-		if self.__arbitro.es_valido(x,y):
+		if self.__arbitro.es_valido(x, y):
 			self.__tablero.colocar(x, y,
 				self.__fabrica.crear_pieza(self.obtener_turno().obtener_tipo()))
 			self.__turno += 1

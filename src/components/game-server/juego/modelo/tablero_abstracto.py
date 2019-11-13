@@ -38,4 +38,6 @@ class TableroAbstracto(ABC):
 		"""
 		pass
 
-	
+	@abstractmethod
+	def obtener_array(self):
+		pass

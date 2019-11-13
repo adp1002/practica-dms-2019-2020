@@ -26,5 +26,8 @@ class TableroTresRaya(TableroAbstracto):
 	def esta_lleno(self):
 		return self.__piezas == TableroTresRaya.MAX_PIEZAS
 
+	def obtener_array(self):
+		return self.__tablero
+
 	def __str__(self):
 		return str(self.__tablero)

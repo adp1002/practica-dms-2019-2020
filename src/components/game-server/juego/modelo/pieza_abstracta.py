@@ -7,7 +7,7 @@ class PiezaAbstracta(ABC):
 	"""
 
 	@abstractmethod
-	def get_tipo(self):
+	def obtener_tipo(self):
 		""" Metodo para obtener al tipo de pieza.
 		---
 		Returns:

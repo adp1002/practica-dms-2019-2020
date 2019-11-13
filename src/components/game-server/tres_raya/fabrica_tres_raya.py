@@ -11,5 +11,5 @@ class FabricaTresRaya(FabricaJuegoMesa):
 	def crear_tablero(self):
 		return TableroTresRaya()
 
-	def crear_arbitro(self):
-		return ArbitroTresRaya()
+	def crear_arbitro(self, tablero):
+		return ArbitroTresRaya(tablero)

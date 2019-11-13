@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class FabricaJuegoMesa(ABC):
 
 	@abstractmethod
-	def crear_pieza(self):
+	def crear_pieza(self, tipo):
 		pass
 
 	@abstractmethod
