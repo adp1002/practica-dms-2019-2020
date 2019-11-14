@@ -22,14 +22,14 @@ class ArbitroTresRaya(ArbitroAbstracto):
         """
         t = self._tablero
         return \
-        t.obtener_pieza(0,0) == t.obtener_pieza(0,1) == t.obtener_pieza(0,2) or \
-        t.obtener_pieza(1,0) == t.obtener_pieza(1,1) == t.obtener_pieza(1,2) or \
-        t.obtener_pieza(2,0) == t.obtener_pieza(2,1) == t.obtener_pieza(2,2) or \
-        t.obtener_pieza(0,0) == t.obtener_pieza(1,0) == t.obtener_pieza(2,0) or \
-        t.obtener_pieza(0,1) == t.obtener_pieza(1,1) == t.obtener_pieza(2,1) or \
-        t.obtener_pieza(0,2) == t.obtener_pieza(1,2) == t.obtener_pieza(2,2) or \
-        t.obtener_pieza(0,0) == t.obtener_pieza(1,1) == t.obtener_pieza(2,2) or \
-        t.obtener_pieza(0,2) == t.obtener_pieza(1,1) == t.obtener_pieza(2,0)
+        t.obtener_pieza(0,0) == t.obtener_pieza(0,1) == t.obtener_pieza(0,2) != None or \
+        t.obtener_pieza(1,0) == t.obtener_pieza(1,1) == t.obtener_pieza(1,2) != None or \
+        t.obtener_pieza(2,0) == t.obtener_pieza(2,1) == t.obtener_pieza(2,2) != None or \
+        t.obtener_pieza(0,0) == t.obtener_pieza(1,0) == t.obtener_pieza(2,0) != None or \
+        t.obtener_pieza(0,1) == t.obtener_pieza(1,1) == t.obtener_pieza(2,1) != None or \
+        t.obtener_pieza(0,2) == t.obtener_pieza(1,2) == t.obtener_pieza(2,2) != None or \
+        t.obtener_pieza(0,0) == t.obtener_pieza(1,1) == t.obtener_pieza(2,2) != None or \
+        t.obtener_pieza(0,2) == t.obtener_pieza(1,1) == t.obtener_pieza(2,0) != None
 
     def esta_acabado(self):
         """

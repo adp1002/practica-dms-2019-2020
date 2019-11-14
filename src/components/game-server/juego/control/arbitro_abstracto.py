@@ -17,8 +17,12 @@ class ArbitroAbstracto(ABC):
         ---
 
         """
-        return self._tablero.obtener_pieza(x, y) is None
+        return self._tablero.obtener_pieza(x, y) is None and not self.esta_acabado()
 
     @abstractmethod
     def hay_ganador(self):
+        pass
+
+    @abstractmethod
+    def esta_acabado(self):
         pass

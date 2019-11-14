@@ -50,7 +50,9 @@ class Partida:
 			Returs:
 				El Jugador con el ganador, si no hay ganador None
 		"""
-		return self.obtener_turno() if self.__arbitro.hay_ganador() else None
+		if self.__arbitro.hay_ganador():
+			return self.__jugador1 if self.__turno % 2 != 0 else self.__jugador2
+		return None
 
 
 	def esta_acabado(self):
