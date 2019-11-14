@@ -29,7 +29,7 @@ class Partida:
 		else:
 			return False
 		return True
-		
+
 	def jugar(self, x, y):
 		""" Método que realiza un movimiento.
 		---
@@ -71,3 +71,9 @@ class Partida:
 
 	def obtener_tablero(self):
 		return self.__tablero
+
+	def obtener_jugador1(self):
+		return self.__jugador1
+
+	def obtener_jugador2(self):
+		return self.__jugador2
