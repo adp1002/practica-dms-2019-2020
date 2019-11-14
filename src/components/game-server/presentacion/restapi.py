@@ -29,11 +29,11 @@ class RestApi:
         auth = AuthClient.instance()
         if not auth.validate_token(token):
             return (401, 'Unauthorized')
-        
+
         jugador = Jugador(token)
         if not self.__partida.registrar_jugador(jugador):
             return (500, 'Server error')
-        
+
         return (200, 'OK')
 
     def comprobar_turno(self, request):
@@ -41,9 +41,9 @@ class RestApi:
         auth = AuthClient.instance()
         if not auth.validate_token(token):
             return (401, 'Unauthorized')
-        
+
         turno = self.__partida.obtener_turno().obtener_token() == token
-        
+
         return (200, json.dumps(turno))
 
     def realizar_jugada(self, request):
@@ -52,7 +52,7 @@ class RestApi:
         turno = self.__partida.obtener_turno()
         if not auth.validate_token(token) or turno.obtener_token() != token:
             return (401, 'Unauthorized')
-        
+
         try:
             x = int(request.form['x'])
             y = int(request.form['y'])
@@ -64,7 +64,7 @@ class RestApi:
     def obtener_tablero(self, request):
         tablero = self.__partida.obtener_tablero().obtener_array()
         out = [[None if pieza is None else str(pieza) for pieza in x] for x in tablero]
-        
+
         return (200, json.dumps(out))
 
     def esta_acabado(self, request):
@@ -76,12 +76,12 @@ class RestApi:
         auth = AuthClient.instance()
         if not auth.validate_token(token):
             return (401, 'Unauthorized')
-        
+
         if not self.__partida.esta_acabado():
             return (400, 'Bad Request')
-        
+
         ganador = self.__partida.obtener_ganador()
-        
+
         if ganador is None:
             resultado = 'Empate'
         elif token == ganador.obtener_token():
