@@ -180,7 +180,6 @@ La comunicación con el servicio se realiza a través de un API REST:
   - **Método**: `GET`
   - **Respuesta**:
     - `200`: Devuelve **true** si la partida esta acabada, sino **false**.
-    
 - `/juego/resultado`: Endpoint informa del resultado de la partida.
   - **Método**: `GET`
   - **Parámetros**:
@@ -189,6 +188,10 @@ La comunicación con el servicio se realiza a través de un API REST:
     - `200`: Devuelve el resultado del jugador ('Ganador', 'Perdedor' o 'Empate').
     - `400`: La partida no esta acabada.
     - `401`: El token dado es incorrecto.
+- `/juego/finalizar`: Endpoint que termina una partida e inicializa otra nueva.
+  - **Método**: `POST`
+  - **Respuesta**:
+    - `200`: Partida finalizada correctamente.
 
 #### Configuración
 
