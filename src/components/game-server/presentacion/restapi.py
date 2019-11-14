@@ -13,9 +13,9 @@ class RestApi:
     JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya)}
 
     def __init__(self, tipo):
-        fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
-        fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
-        self.__partida = Partida(fabrica_juego, fabrica_arbitro)
+        self.__fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
+        self.__fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
+        self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
 
     def status(self, request):
         """ Status handler.
@@ -90,3 +90,15 @@ class RestApi:
             resultado = 'Perdedor'
         
         return (200, resultado)
+
+    def finalizar_partida(self, request):
+        auth = AuthClient.instance()
+        ganador = self.__partida.obtener_ganador()
+        perdedor = self.__partida.obtener_perdedor()
+        if ganador is not None:
+            auth.add_score(ganador.obtener_token(), 1, 1, 0)
+            auth.add_score(perdedor.obtener_token(), -1, 0, 1)
+
+        self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+        
+        return (200, 'OK')

@@ -74,17 +74,9 @@ def obtener_resultado():
     else:
         abort(code)
 
-@app.route('/juego/puntos', methods = ['GET'])
-def obtener_puntos():
-    (code, message) = rest_api.obtener_puntos(request)
-    if (code == 200):
-        return message
-    else:
-        abort(code)
-
-@app.route('/juego/puntuar', methods = ['POST'])
-def sumar_puntos():
-    (code, message) = rest_api.sumar_puntos(request)
+@app.route('/juego/finalizar', methods = ['POST'])
+def finalizar_partida():
+    (code, message) = rest_api.finalizar_partida(request)
     if (code == 200):
         return message
     else:

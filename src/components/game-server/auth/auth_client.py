@@ -48,3 +48,21 @@ class AuthClient:
         if (response.status == 200):
             return True
         return False
+    
+    def add_score(self, token, score, won = 0, lost = 0):
+        """ Performs the token validation against the authentication server.
+        ---
+        Parameters:
+            - token: The authentication token to validate.
+            - score: The score to add to the user.
+            - won: Number of games that the player won.
+            - lost: Number of games that the player lost.
+        Returns:
+            True if the token given is a valid session token in the authentication server. False otherwise.
+        """
+        self.__connection.request('GET', '/score/add', headers = {'Content-Type': 'application/x-www-form-urlencoded'},
+            body = 'token=' + token + '&score=' + score + '&games_won=' + won + '&games_lost=' + lost)
+        response = self.__connection.getresponse()
+        if (response.status == 200):
+            return True
+        return False

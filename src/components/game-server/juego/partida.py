@@ -48,12 +48,21 @@ class Partida:
 		""" Método que devuelve el ganador de la partida.
 		---
 			Returs:
-				El Jugador con el ganador, si no hay ganador None
+				El Jugador ganador, si no hay ganador None
 		"""
 		if self.__arbitro.hay_ganador():
 			return self.__jugador1 if self.__turno % 2 != 0 else self.__jugador2
 		return None
 
+	def obtener_perdedor(self):
+		""" Método que devuelve el perdedor de la partida.
+		---
+			Returs:
+				El Jugador perdedor, si no hay perdedor None
+		"""
+		if self.__arbitro.hay_ganador():
+			return self.__jugador1 if self.__turno % 2 == 0 else self.__jugador2
+		return None
 
 	def esta_acabado(self):
 		""" Método que decide si la partida ha terminado.
