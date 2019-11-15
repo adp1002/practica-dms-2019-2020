@@ -28,6 +28,7 @@ La configuración por defecto creará los siguientes servicios:
 
 - `dms1920-auth-server`: El servidor de autenticación y usuarios, escuchando en el puerto 1234 con un API REST (ver más abajo)
 - `dms1920-hub`: El punto de acceso a los servidores de juego registrados, escuchando en el puerto 4567 con un API REST (ver más abajo)
+- `dms1920-game-server`: El punto de acceso al servidor de juego, escuchando en el puerto 6789 con un API REST (ver más abajo)
 
 ## Servicios
 
@@ -198,5 +199,6 @@ La comunicación con el servicio se realiza a través de un API REST:
 El servidor usa las siguientes variables de entorno para su configuración:
 
 - `GAME`: Nombre del juego.
+- `GAME_SERVER_PORT`: El host en el que se encuentra el servidor de juego.
 - `AUTH_SERVER_HOST`: El host en el que se encuentra el servidor de autenticación.
 - `AUTH_SERVER_PORT`: El puerto en el que está publicado el API REST del servidor de autenticación.
