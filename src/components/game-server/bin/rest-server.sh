@@ -2,8 +2,6 @@
 
 SCRIPT_PATH=$(dirname $0)
 
-export GAME='TresRaya'
-
 export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 export FLASK_APP=${SCRIPT_PATH}/rest-server.py
@@ -13,4 +11,5 @@ then
     export GAME_SERVER_PORT=6789
 fi
 
+curl -X POST -d "name=${GAME}&host=172.10.1.30&port=${GAME_SERVER_PORT}" ${HUB_SERVER_HOST}:${HUB_SERVER_PORT}/server/register
 python3 -m flask run --host=0.0.0.0 --port=${GAME_SERVER_PORT}

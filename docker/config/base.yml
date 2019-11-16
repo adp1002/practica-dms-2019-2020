@@ -53,9 +53,12 @@ services:
       app_net:
         ipv4_address: 172.10.1.30
     environment:
+      GAME: 'TresRaya'
       GAME_SERVER_PORT: 6789
       AUTH_SERVER_HOST: 172.10.1.10
       AUTH_SERVER_PORT: 1234
+      HUB_SERVER_HOST: 172.10.1.20
+      HUB_SERVER_PORT: 4567
 
 networks:
   app_net:
