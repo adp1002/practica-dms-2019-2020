@@ -1,6 +1,10 @@
 from juego.control.arbitro_abstracto import ArbitroAbstracto
 
 class ArbitroTresRaya(ArbitroAbstracto):
+    """ Arbitro del tres en raya.
+    ---
+    La clase contiene las reglas del juego del tres en raya.
+    """
 
     def __init__(self, tablero):
         """ Constructor
@@ -13,12 +17,10 @@ class ArbitroTresRaya(ArbitroAbstracto):
         super().__init__(tablero)
 
     def hay_ganador(self):
-        """
+        """ Método que comprueba si existe un ganador.
         ---
-        Comprueba si existe un ganador comprobando todas las posibles
-        combinaciones ganadoras.
-
-        Returns: True si hay un ganador, False en caso contrario.
+        Returns:
+            True si hay un ganador, sino False.
         """
         t = self._tablero
         return \
@@ -32,11 +34,9 @@ class ArbitroTresRaya(ArbitroAbstracto):
         t.obtener_pieza(0,2) == t.obtener_pieza(1,1) == t.obtener_pieza(2,0) != None
 
     def esta_acabado(self):
-        """
+        """ Método que comprueba si la partida ha finalizado.
         ---
-        Comprueba si la partida ha finalizado, sea porque hay un ganador o
-        porque el tablero está lleno.
-
-        Returns: True si la partida ha terminado, False en caso contrario.
+        Returns: 
+            True si la partida ha terminado, sino False.
         """
         return self.hay_ganador() or self._tablero.esta_lleno()

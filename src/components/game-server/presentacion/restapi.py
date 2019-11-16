@@ -9,22 +9,41 @@ from tres_raya.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
 import json
 
 class RestApi:
+    """ Clase fachada de la API REST
+    ---
+    Esta clase es una fachada con las operaciones proporcionadas a través de la API REST.
+    """
 
     JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya)}
 
     def __init__(self, tipo):
+        """ Constructor.
+        ---
+        Parametros:
+            - tipo: String con el nombre del juego.
+        """
         self.__fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
         self.__fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
         self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
 
     def status(self, request):
-        """ Status handler.
+        """ Controlador de estado.
         ---
-        Always returns a tuple with the 200 status code and an "OK" message.
+        Siempre devuelve una tupla con el código de estado 200 y un mensaje "OK".
         """
         return (200, 'OK')
 
     def registrar_jugador(self, request):
+        """ Registra un jugador en la partida.
+        ---
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, 'OK') cuando se ha registrado con éxito.
+                - (401, 'Unauthorized') cuando el token es invalido.
+                - (500, 'Server error') cuando la partida esta llena.
+        """
         token = request.form['token']
         auth = AuthClient.instance()
         if not auth.validate_token(token):
@@ -37,6 +56,17 @@ class RestApi:
         return (200, 'OK')
 
     def comprobar_turno(self, request):
+        """ Comprueba el turno de un jugador.
+        ---
+        Devuelve True si el jugador tiene el turno, sino False.
+
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, True o False) comprobación correcta.
+                - (401, 'Unauthorized') cuando el token es invalido.
+        """
         token = request.form['token']
         auth = AuthClient.instance()
         if not auth.validate_token(token):
@@ -47,6 +77,16 @@ class RestApi:
         return (200, json.dumps(turno))
 
     def realizar_jugada(self, request):
+        """ Realiza una jugada en la partida.
+        ---
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, 'OK') cuando se ha realizado con éxito.
+                - (400, 'Bad Request') cuando las coordenadas son invalidas o la partida esta acabada.
+                - (401, 'Unauthorized') cuando el token es invalido.
+        """
         token = request.form['token']
         auth = AuthClient.instance()
         turno = self.__partida.obtener_turno()
@@ -62,16 +102,46 @@ class RestApi:
             return (400, 'Bad Request')
 
     def obtener_tablero(self, request):
+        """ Devuelve el tablero en forma de matriz.
+        ---
+        El tablero esta en formato JSON.
+
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, 'OK') cuando se ha devuelto con éxito.
+        """
         tablero = self.__partida.obtener_tablero().obtener_array()
         out = [[None if pieza is None else str(pieza) for pieza in x] for x in tablero]
 
         return (200, json.dumps(out))
 
     def esta_acabado(self, request):
+        """ Comprueba si la partida esta acabada.
+        ---
+        Devuelve True si la partida esta acabada, sino False.
+
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, True o False) comprobación correcta.
+        """
         acabado = self.__partida.esta_acabado()
         return (200, json.dumps(acabado))
 
     def obtener_resultado(self, request):
+        """ Devuelve el resultado obtenido por el jugador.
+        ---
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, 'Ganador', 'Perdedor' o 'Empate') comprobación correcta.
+                - (400, 'Bad Request') cuando la partida no esta acabada.
+                - (401, 'Unauthorized') cuando el token es invalido.
+        """
         token = request.form['token']
         auth = AuthClient.instance()
         if not auth.validate_token(token):
@@ -92,6 +162,14 @@ class RestApi:
         return (200, resultado)
 
     def finalizar_partida(self, request):
+        """ Finaliza la partide e inicializa otra.
+        ---
+        Parametros:
+            - request: La solicitud HTTP recibida en el REST endpoint.
+        Returns:
+            Una tupla con los siguientes valores:
+                - (200, 'OK') operación correcta.
+        """
         auth = AuthClient.instance()
         ganador = self.__partida.obtener_ganador()
         perdedor = self.__partida.obtener_perdedor()

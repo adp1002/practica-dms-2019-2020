@@ -21,7 +21,7 @@ class AuthClient:
         if (AuthClient.__instance is not None):
             raise Exception('A singleton class cannot be initialized twice')
         self.__connection = http.client.HTTPConnection(os.getenv('AUTH_SERVER_HOST', '127.0.0.1'), os.getenv('AUTH_SERVER_PORT', 1234))
-    
+
     @staticmethod
     def instance():
         """ Singleton instance access method.
@@ -48,7 +48,7 @@ class AuthClient:
         if (response.status == 200):
             return True
         return False
-    
+
     def add_score(self, token, score, won = 0, lost = 0):
         """ Performs the token validation against the authentication server.
         ---
