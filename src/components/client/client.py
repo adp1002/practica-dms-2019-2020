@@ -24,19 +24,15 @@ def seleccion_de_servidor():
 
         #Listamos los servidores
         else:
+            peticion_repetir = 'N'
             for idx,servidor in enumerate(servidores_activos):
                 print(str(idx) + ". " + servidor['name'] + " (" + servidor['host'] + ":" + servidor['port'] + ")")
 
-            #Ofrecemos la opcion de repetir la busqueda antes de seleccionar un servidor
-            peticion_repetir = input('¿Quieres repetir la busqueda? (S/N/exit): ')
-            if(peticion_repetir in ['N','n']):
-                #Si no quiere repeter la busqueda, escogemos un servidor
+            #Escogemos un servidor
+            servidor_elegido = input("\nEscribe el numero del servidor de juego que quieras: ")
+            while (int(servidor_elegido) > len(servidores_activos)):
+                print("¡Servidor fuera de rango!")
                 servidor_elegido = input("\nEscribe el numero del servidor de juego que quieras: ")
-                while (int(servidor_elegido) > len(servidores_activos)):
-                    print("¡Servidor fuera de rango!")
-                    servidor_elegido = input("\nEscribe el numero del servidor de juego que quieras: ")
-            elif(peticion_repetir == 'exit'):
-                exit()
     return servidores_activos[int(servidor_elegido)]
 
 
@@ -61,11 +57,18 @@ Parameters:
     - tablero: Matriz a dibujar
 """
 def dibujar_tablero(tablero):
-    for fila in tablero:
-        print('| ', end ='')
+    for idx,fila in enumerate(tablero):
+        #Print de numero en columna
+        if (idx == 0):
+            print('      ', end ='')
+            for i in range(len(fila)):
+                print(i,'  ', end ='')
+            print('\n')
+        print(idx,'. | ', end ='')
         for casilla in fila:
-            print(casilla,end = '')
-            print(' |',end = '')
+            if (casilla is None):
+                casilla = ' '
+            print(casilla,'| ',end = '')
         print('\n')
 
 
@@ -141,9 +144,9 @@ while(not servidor_de_juego.esta_acabado()):
 
     else:
         print('\nAun no es tu turno.\n')
-
-    #Pauser bucle hasta nuevo input.    
-    input('Pulsa una tecla para actualizar.')
+    
+    #Pauser bucle hasta nuevo input.
+    input('Pulsa una tecla para actualizar.\n')
 
 '''
 Fin de partida. Mostrando resultados.
@@ -152,6 +155,7 @@ print('\n\n¡Partida finalizada! Mostrando el tablero final:\n')
 tablero_actual = servidor_de_juego.get_tablero()
 dibujar_tablero(tablero_actual)
 print(servidor_de_juego.get_resultado(token))
+servidor_de_juego.finalizar_partida(token)
 
 '''
 Mostrando score global
@@ -160,6 +164,6 @@ print('\nScores:\n')
 scores = AuthClient.instance().get_score()
 if(scores):
     for idx,score in enumerate(scores):
-        print(ixd + '- ' + score['username'] + ' ' + score['score'] 
-            + ' (' + score['games_won'] +'/' + score['games_lost'] + ')' )
+        print(idx,'- ', score['username'], ' ', score['score'],
+            ' (', score['games_won'], '/', score['games_lost'], ')')
 

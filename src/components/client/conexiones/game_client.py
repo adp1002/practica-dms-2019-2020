@@ -104,7 +104,17 @@ class GameClient:
         response = self.__connection.getresponse()
         if (response.status == 200):
             response_string = response.read().decode('utf-8')
-            return json.loads(response_string)
+            return response_string
         return None
     
-
+    """ Finaliza la partida
+    ---
+    Returns:
+        True si la partida se ha finalizado correctamente
+    """
+    def finalizar_partida(self,token):
+        self.__connection.request('POST', '/juego/finalizar', headers = {'Content-Type': 'application/x-www-form-urlencoded'}, body = 'token=' + token)
+        response = self.__connection.getresponse()
+        if (response.status == 200):
+            return True
+        return False
