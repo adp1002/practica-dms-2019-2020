@@ -66,8 +66,7 @@ def dibujar_tablero(tablero):
         for casilla in fila:
             print(casilla,end = '')
             print(' |',end = '')
-	
-    print('')
+        print('\n')
 
 
 
@@ -149,7 +148,18 @@ while(not servidor_de_juego.esta_acabado()):
 '''
 Fin de partida. Mostrando resultados.
 '''
-print('¡Partida finalizada! Mostrando el tablero final:')
+print('\n\n¡Partida finalizada! Mostrando el tablero final:\n')
 tablero_actual = servidor_de_juego.get_tablero()
 dibujar_tablero(tablero_actual)
 print(servidor_de_juego.get_resultado(token))
+
+'''
+Mostrando score global
+'''
+print('\nScores:\n')
+scores = AuthClient.instance().get_score()
+if(scores):
+    for idx,score in enumerate(scores):
+        print(ixd + '- ' + score['username'] + ' ' + score['score'] 
+            + ' (' + score['games_won'] +'/' + score['games_lost'] + ')' )
+

@@ -100,7 +100,7 @@ class GameClient:
         El resultado del jugador ('Ganador', 'Perdedor' o 'Empate'), o None si hubo algun problema.
     """
     def get_resultado(self,token):
-        self.__connection.request('GET', '/juego/turno', headers = {'Content-Type': 'application/x-www-form-urlencoded'}, body = 'token=' + token)
+        self.__connection.request('GET', '/juego/resultado', headers = {'Content-Type': 'application/x-www-form-urlencoded'}, body = 'token=' + token)
         response = self.__connection.getresponse()
         if (response.status == 200):
             response_string = response.read().decode('utf-8')
