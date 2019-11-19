@@ -191,8 +191,11 @@ La comunicación con el servicio se realiza a través de un API REST:
     - `401`: El token dado es incorrecto.
 - `/juego/finalizar`: Endpoint que termina una partida e inicializa otra nueva.
   - **Método**: `POST`
+  - **Parámetros**:
+    - `token`: El token de usuario.
   - **Respuesta**:
     - `200`: Partida finalizada correctamente.
+    - `401`: El token dado es incorrecto.
 
 #### Configuración
 

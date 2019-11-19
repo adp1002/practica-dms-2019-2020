@@ -25,6 +25,7 @@ class RestApi:
         self.__fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
         self.__fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
         self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+        self.__finalizar = False
 
     def status(self, request):
         """ Controlador de estado.
@@ -162,21 +163,30 @@ class RestApi:
         return (200, resultado)
 
     def finalizar_partida(self, request):
-        """ Finaliza la partide e inicializa otra.
+        """ Finaliza la partide e inicializa otra cuando los dos clientes realizan esta petición.
         ---
         Parametros:
             - request: La solicitud HTTP recibida en el REST endpoint.
         Returns:
             Una tupla con los siguientes valores:
                 - (200, 'OK') operación correcta.
+                - (401, 'Unauthorized') cuando el token es invalido.
         """
+        token = request.form['token']
         auth = AuthClient.instance()
-        ganador = self.__partida.obtener_ganador()
-        perdedor = self.__partida.obtener_perdedor()
-        if ganador is not None:
-            auth.add_score(ganador.obtener_token(), 1, 1, 0)
-            auth.add_score(perdedor.obtener_token(), -1, 0, 1)
+        if not auth.validate_token(token):
+            return (401, 'Unauthorized')
+        
+        if self.__finalizar:
+            ganador = self.__partida.obtener_ganador()
+            perdedor = self.__partida.obtener_perdedor()
+            if ganador is not None:
+                auth.add_score(ganador.obtener_token(), 1, 1, 0)
+                auth.add_score(perdedor.obtener_token(), -1, 0, 1)
 
-        self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+            self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+            self.__finalizar = False
+        else:
+            self.__finalizar = True
         
         return (200, 'OK')
