@@ -61,11 +61,12 @@ Parameters:
     - tablero: Matriz a dibujar
 """
 def dibujar_tablero(tablero):
-    for fila in tablero_inicial:
+    for fila in tablero:
         print('| ', end ='')
         for casilla in fila:
             print(casilla,end = '')
             print(' |',end = '')
+	
     print('')
 
 
@@ -106,7 +107,7 @@ while(servidor_de_juego is None):
     #Seleccionamos el servidor con la funcion seleccion_de_servidor
     servidor_seleccionado = seleccion_de_servidor()
     #Registramos al usuario en servidor. Si no puede, volvemos a mostrar la lista de servidores.
-    servidor_de_juego = registrarse_en_servidor(servidor_seleccionado))
+    servidor_de_juego = registrarse_en_servidor(servidor_seleccionado)
 
 
 '''
@@ -130,8 +131,8 @@ while(not servidor_de_juego.esta_acabado()):
         #Bucle para asegurarse de que la jugada es aceptada por servidor
         es_jugada_valida = False
         while(not es_jugada_valida):
-            coor_x = input('Introduce la cordenada x: ')
-            coor_y = input('Introduce la cordenada y: ')
+            x = input('Introduce la cordenada x: ')
+            y = input('Introduce la cordenada y: ')
             es_jugada_valida = servidor_de_juego.jugar(token,x,y)
             if(not es_jugada_valida):
                 print('Jugada incorrecta. Coordenadas erroneas.')
@@ -151,4 +152,4 @@ Fin de partida. Mostrando resultados.
 print('¡Partida finalizada! Mostrando el tablero final:')
 tablero_actual = servidor_de_juego.get_tablero()
 dibujar_tablero(tablero_actual)
-print(servidor_de_juego.get_resultado())
+print(servidor_de_juego.get_resultado(token))
