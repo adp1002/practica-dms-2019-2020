@@ -202,8 +202,8 @@ La comunicación con el servicio se realiza a través de un API REST:
 El servidor usa las siguientes variables de entorno para su configuración:
 
 - `GAME`: Nombre del juego.
-- `GAME_SERVER_PORT`: El host en el que se encuentra el servidor de juego.
+- `GAME_SERVER_PORT`: El puerto en el que publicará su API REST.
 - `AUTH_SERVER_HOST`: El host en el que se encuentra el servidor de autenticación.
 - `AUTH_SERVER_PORT`: El puerto en el que está publicado el API REST del servidor de autenticación.
-- `HUB_SERVER_HOST`: El host en el que publicará su API REST.
-- `HUB_SERVER_PORT`: El puerto en el que publicará su API REST.
+- `HUB_SERVER_HOST`: El host en el que se encuentra el hub.
+- `HUB_SERVER_PORT`: El puerto en el que está publicado el API REST del hub.
