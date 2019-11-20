@@ -178,15 +178,14 @@ class RestApi:
             return (401, 'Unauthorized')
         
         if self.__finalizar:
+            self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+            self.__finalizar = False
+        else:
             ganador = self.__partida.obtener_ganador()
             perdedor = self.__partida.obtener_perdedor()
             if ganador is not None:
                 auth.add_score(ganador.obtener_token(), 1, 1, 0)
                 auth.add_score(perdedor.obtener_token(), -1, 0, 1)
-
-            self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
-            self.__finalizar = False
-        else:
             self.__finalizar = True
         
         return (200, 'OK')
