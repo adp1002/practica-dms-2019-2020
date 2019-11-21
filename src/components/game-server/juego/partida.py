@@ -6,7 +6,7 @@ class Partida:
     La clase almacena el estado de la partida.
     """
 
-    def __init__(self, fabrica_juego, fabrica_arbitro):
+    def __init__(self, fabrica_juego):
         """ Constructor.
         ---
             Parámetros:
@@ -18,10 +18,10 @@ class Partida:
         self.__jugador2 = None
         self.__fabrica = fabrica_juego
         self.__tablero = fabrica_juego.crear_tablero()
+        self.__arbitro = fabrica_juego.crear_arbitro(self.__tablero)
         self.__turno = 0
         self.__ganador = None
-        self.__arbitro = fabrica_arbitro.crear_arbitro(self.__tablero)
-
+        
     def registrar_jugador(self, jugador):
         """ Método que añade un jugador a la partida.
         ---
@@ -52,7 +52,7 @@ class Partida:
                 self.__fabrica.crear_pieza(self.obtener_turno().obtener_tipo()))
             self.__turno += 1
         else:
-            raise
+            raise Exception('Partida llena')
 
     def obtener_ganador(self):
         """ Método que devuelve el ganador de la partida.

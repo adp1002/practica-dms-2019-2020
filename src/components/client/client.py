@@ -163,7 +163,7 @@ Mostrando score global
 print('\nScores:\n')
 scores = AuthClient.instance().get_score()
 if(scores):
-    for idx,score in enumerate(scores):
+    for idx,score in enumerate(scores, 1):
         print(idx,'- ', score['username'], ' ', score['score'],
             ' (', score['games_won'], '/', score['games_lost'], ')')
 

@@ -1,9 +1,9 @@
-from juego.modelo.pieza_abstracta import PiezaAbstracta
+from abc import ABC, abstractmethod
 
-class PiezaTresRaya(PiezaAbstracta):
-    """ Pieza del tres en raya.
+class PiezaAbstracta(ABC):
+    """ Clase abstracta que representa un pieza.
     ---
-    La clase contiene el tipo de pieza.
+    La clase proporciona la estructura de una pieza.
     """
 
     def __init__(self, tipo):
@@ -12,7 +12,7 @@ class PiezaTresRaya(PiezaAbstracta):
             Parámetros:
                 - tipo: String del tipo de pieza.
         """
-        self.__tipo = tipo
+        self._tipo = tipo
 
     def obtener_tipo(self):
         """ Método para obtener al tipo de pieza.
@@ -20,10 +20,11 @@ class PiezaTresRaya(PiezaAbstracta):
             Return:
                 Un String del tipo de pieza.
         """
-        return self.__tipo
-    
+        return self._tipo
+
+    @abstractmethod
     def __eq__(self, other):
-        return isinstance(other, PiezaTresRaya) and self.__tipo == other.__tipo
+        pass
 
     def __str__(self):
-        return self.__tipo
+        return self._tipo

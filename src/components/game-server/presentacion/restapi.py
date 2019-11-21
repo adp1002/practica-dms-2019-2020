@@ -1,12 +1,14 @@
 from flask import Flask, escape, request, abort
-from auth.auth_client import AuthClient
+from conexiones.auth_client import AuthClient
+from conexiones.hub_client import HubClient
 
 from juego.partida import Partida
-from juego.jugador import Jugador
-from tres_raya.fabrica_tres_raya import FabricaTresRaya
-from tres_raya.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
+from juego.datos.jugador import Jugador
+from juego.fabrica_tres_raya import FabricaTresRaya
+from juego.fabrica_conecta_cuatro import FabricaConectaCuatro
 
 import json
+import os
 
 class RestApi:
     """ Clase fachada de la API REST
@@ -14,7 +16,8 @@ class RestApi:
     Esta clase es una fachada con las operaciones proporcionadas a través de la API REST.
     """
 
-    JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya)}
+    JUEGOS = {"TresRaya" : FabricaTresRaya,
+              "Conecta4" : FabricaConectaCuatro}
 
     def __init__(self, tipo):
         """ Constructor.
@@ -22,10 +25,14 @@ class RestApi:
         Parametros:
             - tipo: String con el nombre del juego.
         """
-        self.__fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
-        self.__fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
-        self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+        self.__fabrica_juego = RestApi.JUEGOS.get(tipo)()
+        self.__partida = Partida(self.__fabrica_juego)
         self.__finalizar = False
+
+        game = os.getenv('GAME')
+        host = os.getenv('GAME_SERVER_HOST', '172.0.0.1')
+        port = os.getenv('GAME_SERVER_PORT', 6789)
+        HubClient.instance().register(game, host, port)
 
     def status(self, request):
         """ Controlador de estado.
@@ -178,15 +185,14 @@ class RestApi:
             return (401, 'Unauthorized')
         
         if self.__finalizar:
+            self.__partida = Partida(self.__fabrica_juego)
+            self.__finalizar = False
+        else:
             ganador = self.__partida.obtener_ganador()
             perdedor = self.__partida.obtener_perdedor()
             if ganador is not None:
                 auth.add_score(ganador.obtener_token(), 1, 1, 0)
                 auth.add_score(perdedor.obtener_token(), -1, 0, 1)
-
-            self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
-            self.__finalizar = False
-        else:
             self.__finalizar = True
         
         return (200, 'OK')

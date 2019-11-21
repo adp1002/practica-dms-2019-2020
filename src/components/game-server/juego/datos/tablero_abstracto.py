@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class TableroAbstracto(ABC):
     """ Clase abstracta que representa un tablero.
@@ -6,18 +6,22 @@ class TableroAbstracto(ABC):
     La clase proporciona la estructura de una tablero.
     """
 
-    @abstractmethod
+    def __init__(self, alto, ancho):
+        self.__tablero = [[None] * ancho  for _ in range(alto)]
+        self.__piezas = 0
+        self.__max_piezas = ancho * alto
+
     def colocar(self, x, y, pieza):
-        """ Método que coloca un pieza en las coordenadas.
+        """ Método que coloca una pieza en las coordenadas.
         ---
         Parámetros:
             - x: Fila del tablero.
             - y: Columna del tablero.
             - pieza: Pieza a colocar.
         """
-        pass
+        self.__tablero[x][y] = pieza
+        self.__piezas += 1
 
-    @abstractmethod
     def obtener_pieza(self, x, y):
         """ Método que devuelva la pieza de las coordenadas.
         ---
@@ -27,22 +31,23 @@ class TableroAbstracto(ABC):
         Returns:
             Pieza del tablero.
         """
-        pass
+        return self.__tablero[x][y]
 
-    @abstractmethod
     def esta_lleno(self):
         """ Método que comprueba si el tablero esta lleno.
         ---
         Returns:
             True si el tablero esta lleno, sino False.
         """
-        pass
+        return self.__piezas == self.__max_piezas
 
-    @abstractmethod
     def obtener_array(self):
         """ Método que devuelve el tablero en forma de matriz.
         ---
         Returns:
             Una matriz con el contenido del tablero.
         """
-        pass
+        return self.__tablero
+
+    def __str__(self):
+        return str(self.__tablero)
