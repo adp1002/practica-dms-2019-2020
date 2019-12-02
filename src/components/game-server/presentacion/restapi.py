@@ -5,6 +5,8 @@ from juego.partida import Partida
 from juego.datos.jugador import Jugador
 from juego.fabrica_tres_raya import FabricaTresRaya
 from juego.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
+from juego.fabrica_conecta_cuatro import FabricaConectaCuatro
+from juego.fabrica_arbitro_conecta_cuatro import FabricaArbitroConectaCuatro
 
 import json
 
@@ -14,7 +16,8 @@ class RestApi:
     Esta clase es una fachada con las operaciones proporcionadas a través de la API REST.
     """
 
-    JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya)}
+    JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya),
+              "Conecta4" : (FabricaConectaCuatro, FabricaArbitroConectaCuatro)}
 
     def __init__(self, tipo):
         """ Constructor.
