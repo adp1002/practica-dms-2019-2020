@@ -1,12 +1,12 @@
 from juego.modelo.tablero_abstracto import TableroAbstracto
 
-class TableroTresRaya(TableroAbstracto):
+class TableroConectaCuatro(TableroAbstracto):
     """ Clase que representa un tablero del tres en raya.
     ---
     La clase almacena las piezas del tres en raya.
     """
 
-    MAX_PIEZAS = 9
+    MAX_PIEZAS = 42
 
     def __init__(self, ancho, alto):
         """Constructor.
