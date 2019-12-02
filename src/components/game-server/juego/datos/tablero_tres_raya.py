@@ -1,4 +1,4 @@
-from juego.modelo.tablero_abstracto import TableroAbstracto
+from juego.datos.tablero_abstracto import TableroAbstracto
 
 class TableroTresRaya(TableroAbstracto):
     """ Clase que representa un tablero del tres en raya.

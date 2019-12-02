@@ -1,4 +1,4 @@
-from juego.control.arbitro_abstracto import ArbitroAbstracto
+from juego.logica.arbitro_abstracto import ArbitroAbstracto
 
 class ArbitroTresRaya(ArbitroAbstracto):
     """ Arbitro del tres en raya.

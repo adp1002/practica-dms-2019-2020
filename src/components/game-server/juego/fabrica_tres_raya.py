@@ -1,7 +1,6 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
-from tres_raya.modelo.pieza_tres_raya import PiezaTresRaya
-from tres_raya.modelo.tablero_tres_raya import TableroTresRaya
-from tres_raya.control.arbitro_tres_raya import ArbitroTresRaya
+from juego.datos.pieza_tres_raya import PiezaTresRaya
+from juego.datos.tablero_tres_raya import TableroTresRaya
 
 class FabricaTresRaya(FabricaJuegoMesa):
     """ Fabrica del tres en rata.

@@ -2,9 +2,9 @@ from flask import Flask, escape, request, abort
 from auth.auth_client import AuthClient
 
 from juego.partida import Partida
-from juego.jugador import Jugador
-from tres_raya.fabrica_tres_raya import FabricaTresRaya
-from tres_raya.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
+from juego.datos.jugador import Jugador
+from juego.fabrica_tres_raya import FabricaTresRaya
+from juego.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
 
 import json
 

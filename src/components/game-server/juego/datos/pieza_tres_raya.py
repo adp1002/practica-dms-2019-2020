@@ -1,4 +1,4 @@
-from juego.modelo.pieza_abstracta import PiezaAbstracta
+from juego.datos.pieza_abstracta import PiezaAbstracta
 
 class PiezaTresRaya(PiezaAbstracta):
     """ Pieza del tres en raya.

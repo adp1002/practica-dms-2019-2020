@@ -1,5 +1,5 @@
 from juego.fabrica_abstracta_arbitro import FabricaAbstractaArbitro
-from tres_raya.control.arbitro_tres_raya import ArbitroTresRaya
+from juego.logica.arbitro_tres_raya import ArbitroTresRaya
 
 class FabricaArbitroTresRaya(FabricaAbstractaArbitro):
     """ Fabrica de árbitros del tres en rata.
