@@ -20,11 +20,11 @@ class PiezaAbstracta(ABC):
             Return:
                 Un String del tipo de pieza.
         """
-        return self.__tipo
+        return self._tipo
 
     @abstractmethod
     def __eq__(self, other):
         pass
 
     def __str__(self):
-        return self.__tipo
+        return self._tipo

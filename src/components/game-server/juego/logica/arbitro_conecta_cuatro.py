@@ -16,6 +16,20 @@ class ArbitroTresRaya(ArbitroAbstracto):
         """
         super().__init__(tablero)
 
+    def es_valido(self, x, y):
+        """ Método que comprueba si la jugada es válida.
+        ---
+        Parametros:
+            - x: Fila del tablero.
+            - y: Columna del tablero.
+        Returns:
+            True si es valido, sino False.
+        """
+        if x == 0:
+            return super().es_valido()
+        else:
+            return super().es_valido() and self._tablero.obtener_pieza(x, y-1) is not None
+
     def hay_ganador(self):
         """ Método que comprueba si existe un ganador.
         ---

@@ -39,7 +39,7 @@ class TableroAbstracto(ABC):
         Returns:
             True si el tablero esta lleno, sino False.
         """
-        pass
+        return self.__piezas == self.__max_piezas
 
     def obtener_array(self):
         """ Método que devuelve el tablero en forma de matriz.
