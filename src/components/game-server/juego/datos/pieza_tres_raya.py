@@ -15,4 +15,4 @@ class PiezaTresRaya(PiezaAbstracta):
         super().__init__(tipo)
 
     def __eq__(self, other):
-        return isinstance(other, PiezaTresRaya) and self.__tipo == other.__tipo
+        return isinstance(other, PiezaTresRaya) and self._tipo == other._tipo

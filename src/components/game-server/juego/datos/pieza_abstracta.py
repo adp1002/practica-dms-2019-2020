@@ -12,7 +12,7 @@ class PiezaAbstracta(ABC):
             Parámetros:
                 - tipo: String del tipo de pieza.
         """
-        self.__tipo = tipo
+        self._tipo = tipo
 
     def obtener_tipo(self):
         """ Método para obtener al tipo de pieza.
