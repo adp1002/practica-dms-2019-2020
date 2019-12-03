@@ -25,3 +25,12 @@ class FabricaJuegoMesa(ABC):
             Un tablero del juego.
         """
         pass
+
+    @abstractmethod
+    def crear_arbitro(self, tablero):
+        """ Método que crea un arbitro.
+        ---
+        Returns:
+            Un arbitro del juego.
+        """
+        pass

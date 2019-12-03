@@ -1,6 +1,7 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
 from juego.datos.pieza_conecta_cuatro import PiezaConectaCuatro
 from juego.datos.tablero_conecta_cuatro import TableroConectaCuatro
+from juego.logica.arbitro_conecta_cuatro import ArbitroConectaCuatro
 
 class FabricaTresRaya(FabricaJuegoMesa):
     """ Fabrica del conecta 4.
@@ -25,3 +26,11 @@ class FabricaTresRaya(FabricaJuegoMesa):
             Un tablero del juego.
         """
         return TableroConectaCuatro()
+    
+    def crear_arbitro(self, tablero):
+        """ Método que crea un arbitro.
+        ---
+        Returns:
+            Un arbitro del juego.
+        """
+        return ArbitroConectaCuatro(tablero)

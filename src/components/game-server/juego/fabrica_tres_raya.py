@@ -1,6 +1,7 @@
 from juego.fabrica_abstracta_juegos import FabricaJuegoMesa
 from juego.datos.pieza_tres_raya import PiezaTresRaya
 from juego.datos.tablero_tres_raya import TableroTresRaya
+from juego.logica.arbitro_tres_raya import ArbitroTresRaya
 
 class FabricaTresRaya(FabricaJuegoMesa):
     """ Fabrica del tres en rata.
@@ -25,3 +26,11 @@ class FabricaTresRaya(FabricaJuegoMesa):
             Un tablero del juego.
         """
         return TableroTresRaya()
+
+    def crear_arbitro(self, tablero):
+        """ Método que crea un arbitro.
+        ---
+        Returns:
+            Un arbitro del juego.
+        """
+        return ArbitroTresRaya(tablero)
