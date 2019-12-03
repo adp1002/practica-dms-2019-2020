@@ -50,13 +50,13 @@ class ArbitroConectaCuatro(ArbitroAbstracto):
                     return True
 
         for i in range(len(t[0])-3):
-            for j in range(len(t)-3, 0, -1):
+            for j in range(len(t)-3-1, -1, -1):
                 if t.obtener_pieza(i, j) == t.obtener_pieza(i+1, j-1) == \
                 t.obtener_pieza(i+2, j-2) == t.obtener_pieza(i+3, j-3) != None:
                     return True
 
-        for i in range(len(t[0])-3, 0, -1):
-            for j in range(len(t)-3, 0, -1):
+        for i in range(len(t[0])-3-1, -1, -1):
+            for j in range(len(t)-3-1, -1, -1):
                 if t.obtener_pieza(i, j) == t.obtener_pieza(i-1, j-1) == \
                 t.obtener_pieza(i-2, j-2) == t.obtener_pieza(i-3, j-3) != None:
                     return True
