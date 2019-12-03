@@ -6,19 +6,25 @@ class PiezaAbstracta(ABC):
     La clase proporciona la estructura de una pieza.
     """
 
-    @abstractmethod
-    def obtener_tipo(self):
-        """ Método para obtener el tipo de pieza.
+    def __init__(self, tipo):
+        """Constructor.
         ---
-        Returns:
-            Un String del tipo de pieza.
+            Parámetros:
+                - tipo: String del tipo de pieza.
         """
-        pass
-    
+        self.__tipo = tipo
+
+    def obtener_tipo(self):
+        """ Método para obtener al tipo de pieza.
+        ---
+            Return:
+                Un String del tipo de pieza.
+        """
+        return self.__tipo
+
     @abstractmethod
     def __eq__(self, other):
         pass
 
-    @abstractmethod
     def __str__(self):
-        pass
+        return self.__tipo

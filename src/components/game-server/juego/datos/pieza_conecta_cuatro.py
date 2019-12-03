@@ -12,18 +12,7 @@ class PiezaConectaCuatro(PiezaAbstracta):
             Parámetros:
                 - tipo: String del tipo de pieza.
         """
-        self.__tipo = tipo
-
-    def obtener_tipo(self):
-        """ Método para obtener al tipo de pieza.
-        ---
-            Return:
-                Un String del tipo de pieza.
-        """
-        return self.__tipo
+        super().__init__(tipo)
 
     def __eq__(self, other):
         return isinstance(other, PiezaConectaCuatro) and self.__tipo == other.__tipo
-
-    def __str__(self):
-        return self.__tipo

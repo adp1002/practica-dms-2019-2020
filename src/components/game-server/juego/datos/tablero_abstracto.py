@@ -9,6 +9,7 @@ class TableroAbstracto(ABC):
     def __init__(self, ancho, alto):
         self.__tablero = [[None]*ancho  for _ in range(alto)]
         self.__piezas = 0
+        self.__max_piezas = ancho * alto
 
     def colocar(self, x, y, pieza):
         """ Método que coloca una pieza en las coordenadas.
