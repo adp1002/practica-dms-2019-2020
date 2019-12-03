@@ -26,9 +26,9 @@ class ArbitroConectaCuatro(ArbitroAbstracto):
             True si es valido, sino False.
         """
         if x == 0:
-            return super().es_valido()
+            return super().es_valido(x, y)
         else:
-            return super().es_valido() and self._tablero.obtener_pieza(x, y-1) is not None
+            return super().es_valido(x, y) and self._tablero.obtener_pieza(x, y-1) is not None
 
     def hay_ganador(self):
         """ Método que comprueba si existe un ganador.
