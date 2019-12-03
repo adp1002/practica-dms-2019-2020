@@ -44,18 +44,18 @@ class ArbitroConectaCuatro(ArbitroAbstracto):
 
         for i in range(len(t[0])):
             for j in range(len(t)-3):
-                if t[i][j] == t[i][j+1] == t[i][j+2] == t[i][j+3] != None:
+                if t[j][i] == t[j+1][i] == t[j+2][i] == t[j+3][i] != None:
                     return True
 
         for i in range(len(t[0])-3):
             for j in range(len(t)-3-1, -1, -1):
-                if t[i][j] == t[i+1][j-1] == t[i+2][j-2] == t[i+3][j-3] != None:
+                if t[i][j] == t[j-1][i+1] == t[j-2][i+2] == t[j-3][i+3] != None:
                     return True
 
         for i in range(len(t[0])-3-1, -1, -1):
             for j in range(len(t)-3-1, -1, -1):
-                if t[i+2][j-2] == t[i-1][j-1] == \
-                t[i-2][j-2] == t[i-3][j-3] != None:
+                if t[j-2][i+2] == t[j-1][i-1] == \
+                t[j-2][i-2] == t[j-3][i-3] != None:
                     return True
         return False
 
