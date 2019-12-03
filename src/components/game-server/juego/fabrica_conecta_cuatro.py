@@ -3,7 +3,7 @@ from juego.datos.pieza_conecta_cuatro import PiezaConectaCuatro
 from juego.datos.tablero_conecta_cuatro import TableroConectaCuatro
 from juego.logica.arbitro_conecta_cuatro import ArbitroConectaCuatro
 
-class FabricaTresRaya(FabricaJuegoMesa):
+class FabricaConectaCuatro(FabricaJuegoMesa):
     """ Fabrica del conecta 4.
     ---
     La clase se encarga de crear tableros y piezas del conecta 4.

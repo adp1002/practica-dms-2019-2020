@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 
 class TableroAbstracto(ABC):
     """ Clase abstracta que representa un tablero.
@@ -7,7 +7,7 @@ class TableroAbstracto(ABC):
     """
 
     def __init__(self, ancho, alto):
-        self.__tablero = [[None]*ancho  for _ in range(alto)]
+        self.__tablero = [[None] * ancho  for _ in range(alto)]
         self.__piezas = 0
         self.__max_piezas = ancho * alto
 
