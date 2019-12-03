@@ -1,4 +1,4 @@
-from juego.modelo.tablero_abstracto import TableroAbstracto
+from juego.datos.tablero_abstracto import TableroAbstracto
 
 class TableroTresRaya(TableroAbstracto):
     """ Clase que representa un tablero del tres en raya.
@@ -6,9 +6,12 @@ class TableroTresRaya(TableroAbstracto):
     La clase almacena las piezas del tres en raya.
     """
 
-    def __init__(self, ancho, alto):
+    FILAS = 3
+    COLUMNAS = 3
+
+    def __init__(self):
         """Constructor.
         ---
         Inicializa el un tablero vacío.
         """
-        super().__init__(ancho, alto)
+        super().__init__(TableroTresRaya.FILAS, TableroTresRaya.COLUMNAS)

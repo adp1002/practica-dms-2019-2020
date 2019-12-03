@@ -4,9 +4,7 @@ from auth.auth_client import AuthClient
 from juego.partida import Partida
 from juego.datos.jugador import Jugador
 from juego.fabrica_tres_raya import FabricaTresRaya
-from juego.fabrica_arbitro_tres_raya import FabricaArbitroTresRaya
-from juego.fabrica_conecta_cuatro import FabricaConectaCuatro
-from juego.fabrica_arbitro_conecta_cuatro import FabricaArbitroConectaCuatro
+#from juego.fabrica_conecta_cuatro import FabricaConectaCuatro
 
 import json
 
@@ -16,8 +14,9 @@ class RestApi:
     Esta clase es una fachada con las operaciones proporcionadas a través de la API REST.
     """
 
-    JUEGOS = {"TresRaya" : (FabricaTresRaya, FabricaArbitroTresRaya),
-              "Conecta4" : (FabricaConectaCuatro, FabricaArbitroConectaCuatro)}
+    JUEGOS = {"TresRaya" : FabricaTresRaya
+              #"Conecta4" : FabricaConectaCuatro
+             }
 
     def __init__(self, tipo):
         """ Constructor.
@@ -25,9 +24,8 @@ class RestApi:
         Parametros:
             - tipo: String con el nombre del juego.
         """
-        self.__fabrica_juego = RestApi.JUEGOS.get(tipo)[0]()
-        self.__fabrica_arbitro = RestApi.JUEGOS.get(tipo)[1]()
-        self.__partida = Partida(self.__fabrica_juego, self.__fabrica_arbitro)
+        self.__fabrica_juego = RestApi.JUEGOS.get(tipo)()
+        self.__partida = Partida(self.__fabrica_juego)
         self.__finalizar = False
 
     def status(self, request):
