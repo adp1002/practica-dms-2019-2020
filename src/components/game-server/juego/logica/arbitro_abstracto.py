@@ -1,6 +1,10 @@
 from abc import ABC, abstractmethod
 
 class ArbitroAbstracto(ABC):
+    """ Arbitro abstracto.
+    ---
+    La clase contiene las reglas del juego.
+    """
 
     def __init__(self, tablero):
         """ Constructor.
