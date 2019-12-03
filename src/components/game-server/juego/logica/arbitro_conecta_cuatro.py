@@ -1,4 +1,5 @@
 from juego.logica.arbitro_abstracto import ArbitroAbstracto
+from juego.datos.tablero_conecta_cuatro import TableroConectaCuatro
 
 class ArbitroConectaCuatro(ArbitroAbstracto):
     """ Arbitro del conecta cuatro.
@@ -25,10 +26,10 @@ class ArbitroConectaCuatro(ArbitroAbstracto):
         Returns:
             True si es valido, sino False.
         """
-        if x == 0:
+        if x == TableroConectaCuatro.FILAS - 1:
             return super().es_valido(x, y)
-        else:
-            return super().es_valido(x, y) and self._tablero.obtener_pieza(x, y-1) is not None
+
+        return super().es_valido(x, y) and self._tablero.obtener_pieza(x + 1, y) is not None
 
     def hay_ganador(self):
         """ Método que comprueba si existe un ganador.

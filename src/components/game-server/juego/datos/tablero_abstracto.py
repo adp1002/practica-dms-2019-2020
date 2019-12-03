@@ -6,7 +6,7 @@ class TableroAbstracto(ABC):
     La clase proporciona la estructura de una tablero.
     """
 
-    def __init__(self, ancho, alto):
+    def __init__(self, alto, ancho):
         self.__tablero = [[None] * ancho  for _ in range(alto)]
         self.__piezas = 0
         self.__max_piezas = ancho * alto
